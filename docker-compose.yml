@@ -1,0 +1,22 @@
+# Docker Compose configuration
+
+services:
+  # Node.js application
+  item-app:
+    image: dellaraharjo/item-app:v1
+    ports:
+      - "8185:8080"
+    depends_on:
+      - item-db
+    restart: unless-stopped
+
+  # MongoDB database
+  item-db:
+    image: mongo:3
+    volumes:
+      - app-db:/data/db
+    restart: unless-stopped
+
+# Persistent storage for MongoDB
+volumes:
+  app-db:
